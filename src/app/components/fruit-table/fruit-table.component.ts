@@ -37,6 +37,78 @@ export class FruitTableComponent implements OnInit {
     console.log('filtered results',resultTable)
   }
 
+  fruitSort (event: Event) {
+    const sortBy = (event.target as HTMLInputElement).value
+    console.log('sort fruits by:', sortBy)
+    let dataTable = this.dataSource
+    let resultTable = []
+    console.log('input data for sorting:',dataTable)
+    switch (sortBy) {
+      case "nameAscending":
+        console.log('sort by name, ascending');
+        dataTable.value.sort(function(a, b){
+          let x = a.name.toLowerCase();
+          let y = b.name.toLowerCase();
+          if (x < y) {return -1;}
+          if (x > y) {return 1;}
+          return 0;
+        });
+        dataTable.value.forEach ((fruitInfo) => {
+          resultTable.push(fruitInfo)
+        })
+        break;
+      case "nameDescending":
+        console.log('sort by name, descending');
+        dataTable.value.sort(function(a, b){
+          let x = a.name.toLowerCase();
+          let y = b.name.toLowerCase();
+          if (x < y) {return -1;}
+          if (x > y) {return 1;}
+          return 0;
+        });
+        dataTable.value.forEach ((fruitInfo) => {
+          resultTable.push(fruitInfo)
+        })
+        resultTable.reverse()
+        break;
+      case "carbsAscending":
+        console.log('sort by carbs, ascending');
+        dataTable.value.sort(function(a, b){
+          let x = a.nutritions.carbohydrates;
+          let y = b.nutritions.carbohydrates;
+          if (x < y) {return -1;}
+          if (x > y) {return 1;}
+          return 0;
+        });
+        dataTable.value.forEach ((fruitInfo) => {
+          resultTable.push(fruitInfo)
+        })
+        break;
+      case "carbsDescending":
+        console.log('sort by carbs, descending');
+        dataTable.value.sort(function(a, b){
+          let x = a.nutritions.carbohydrates;
+          let y = b.nutritions.carbohydrates;
+          if (x < y) {return -1;}
+          if (x > y) {return 1;}
+          return 0;
+        });
+        dataTable.value.forEach ((fruitInfo) => {
+          resultTable.push(fruitInfo)
+        })
+        resultTable.reverse()
+        break;
+      default:
+        console.log('no matches');
+        dataTable.value.forEach ((fruitInfo) => {
+          resultTable.push(fruitInfo)
+        })
+    }
+    console.log ('sorted data:',resultTable)
+    this.filteredDataSource=resultTable
+    // figure out how to call fruitFilter() in case a filter is in place
+  }
+
   ngOnInit(): void {
   }
 }
