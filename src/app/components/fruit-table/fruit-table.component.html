@@ -5,8 +5,31 @@
                 <mat-card-header>
                     <mat-card-title>Grassland Ventures Fruit Database:</mat-card-title>
                 </mat-card-header>
+                <mat-card-subtitle>
+                    <label for="filter" class = "filter-text-input-titles">Filter by:  </label>
+                    <input  (keyup)="fruitFilter($event)"
+                            name="filter"
+                            id="filter"
+                            class="text-input"
+                            default=""
+                            matInput 
+                            #filter
+                            placeholder="Name, Genus, Family or Order"
+                    >
+                    <!-- <p>"{{filter.value}}"</p> -->
+                </mat-card-subtitle>
+                <mat-card-subtitle>
+                    <label for="sort" class = "filter-text-input-titles">Sort by:  </label>
+                    <select name="sort" id="sort" class="filter" matNativeControl title = "Sort by:">
+                        <option value="null">None</option>
+                        <option value="nameAscending">Name - ascending</option>
+                        <option value="nameDescending">Name - descending</option>
+                        <option value="carbsAscending">Carbohydrates - ascending</option>
+                        <option value="carbsDescending">Carbohydrates - descending</option>
+                    </select>
+                </mat-card-subtitle>
                 <mat-card-content>
-                    <table class="mat-table" mat-table [dataSource]="viewModel.fruitData$">
+                    <table class="mat-table" mat-table [dataSource]="filteredDataSource">
                         <mat-text-column name="name"></mat-text-column>
                         <mat-text-column name="id"></mat-text-column>
                         <mat-text-column name="genus"></mat-text-column>
@@ -23,6 +46,10 @@
                         </ng-container>
                         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
                         <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4" *ngIf="!(viewModel.loadingFruit$|async)">
+                                No data matching the filter "{{filter.value}}"</td>
+                            </tr>
                     </table>
                     <div class="loading-spinner-container" *ngIf="!!(viewModel.loadingFruit$|async)">
                         <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
