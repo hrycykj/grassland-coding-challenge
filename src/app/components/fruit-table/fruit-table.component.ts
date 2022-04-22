@@ -14,7 +14,7 @@ export class FruitTableComponent implements OnInit {
 
   }
   dataSource = this.viewModel.fruitData$
-  filteredDataSource = this.dataSource.value
+  filteredDataSource = this.dataSource.value||this.dataSource
 
   fruitFilter(event: Event) {
     console.log('event', event)
