@@ -5,3 +5,40 @@
   width: 100%;
   justify-content: center;
 }
+
+.align-last-column {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.text-input {
+  width: 50%;
+  justify-content: center;
+}
+
+.sort {
+  width: 50%;
+  justify-content: center;
+}
+.filter-text-input-titles {
+  width: 25%;
+}
+
+.zebra {
+  background-color: #fafafa;
+}
+.zebra:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.zebra:nth-child(odd) {
+  background-color: #fafafa;
+}
+
+.carbs-less-than-50 {
+  font-weight: bold;
+}
+
+.green-ish {
+  background-color: #31bf5d
+}
